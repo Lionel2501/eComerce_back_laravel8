@@ -99,4 +99,18 @@ class ProductoController extends Controller
         $producto->save();
         return \response()->json(['res' => true, 'message' => 'el dislike se incremento de 1'], 200);
     }
+
+    public function setImagen(Request $request, $id){
+        $producto = Producto::findOrFail($id);
+        $producto->url_imagen = $this->cargarImagen($request->imagen, $id);
+        $producto->save();
+
+        return \response()->json(['res' => true, 'message' => 'se subio la imagen'], 200);
+    }
+
+    private function cargarImagen($file, $id){
+        $nombreArchivo = time() . "_{$id}." . $file->getClientOriginalExtension();
+        $file->move(\public_path('imagenes'), $nombreArchivo);
+        return $nombreArchivo;
+    }
 }

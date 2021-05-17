@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource("/productos", \App\Http\Controllers\ProductoController::class); //CRUD de una tabla
 Route::put("set_like/{producto}", [\App\Http\Controllers\ProductoController::class, 'setLike'])->name('set_like');
 Route::put("set_dislike/{producto}", [\App\Http\Controllers\ProductoController::class, 'setDislike'])->name('set_Dislike');
+Route::put("set_imagen/{producto}", [\App\Http\Controllers\ProductoController::class, 'setImagen'])->name('set_imagen');
 
 
 //Route::get("/productos", [\App\Http\Controllers\ProductoController::class, 'index']);
