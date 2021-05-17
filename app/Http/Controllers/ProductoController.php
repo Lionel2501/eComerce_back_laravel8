@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProductoRequest;
+use App\Http\Requests\UpdateProductoRequest;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -32,6 +34,11 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $input['user_id'] = 1;
+        $producto = Producto::create($input);
+
+        return \response()->json(['res' => true, 'message' => 'insertado correctamente'], 200);
     }
 
     /**
@@ -53,9 +60,14 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductoRequest $request, $id)
     {
-        //
+        //update producto set nombre $request .... where id = $id
+        $input = $request->all();
+        $producto = Producto::find($id);
+        $producto->update($input);
+
+        return \response()->json(['res' => true, 'message' => 'modificado correctamente'], 200);
     }
 
     /**
@@ -72,5 +84,19 @@ class ProductoController extends Controller
         } catch (\Exception $e) {
             return \response()->json(['res' => false, 'message' => $e->getMessage()], 200);
         }
+    }
+
+    public function setLike($id){
+        $producto = Producto::find($id);
+        $producto->like = $producto->like + 1;
+        $producto->save();
+        return \response()->json(['res' => true, 'message' => 'el like se incremento de 1'], 200);
+    }
+
+    public function setDislike($id){
+        $producto = Producto::find($id);
+        $producto->dislike = $producto->dislike + 1;
+        $producto->save();
+        return \response()->json(['res' => true, 'message' => 'el dislike se incremento de 1'], 200);
     }
 }

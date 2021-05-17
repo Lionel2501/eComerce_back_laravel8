@@ -19,6 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/productos", [\App\Http\Controllers\ProductoController::class, 'index']);
-Route::get("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'show']);
-Route::delete("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'destroy']);
+Route::apiResource("/productos", \App\Http\Controllers\ProductoController::class); //CRUD de una tabla
+Route::put("set_like/{producto}", [\App\Http\Controllers\ProductoController::class, 'setLike'])->name('set_like');
+Route::put("set_dislike/{producto}", [\App\Http\Controllers\ProductoController::class, 'setDislike'])->name('set_Dislike');
+
+
+//Route::get("/productos", [\App\Http\Controllers\ProductoController::class, 'index']);
+//Route::get("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'show']);
+//Route::delete("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'destroy']);
+//Route::post("/productos", [\App\Http\Controllers\ProductoController::class, 'store']);
+//Route::put("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'update']);
