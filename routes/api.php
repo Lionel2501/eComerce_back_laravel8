@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\ProductoController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post("login", [\App\Http\Controllers\UserController::class, 'login'])->name('login');
 
 Route::apiResource("/productos", \App\Http\Controllers\ProductoController::class); //CRUD de una tabla
 Route::put("set_like/{producto}", [\App\Http\Controllers\ProductoController::class, 'setLike'])->name('set_like');
