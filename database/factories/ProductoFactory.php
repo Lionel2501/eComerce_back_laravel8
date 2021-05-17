@@ -22,7 +22,13 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'codigo' => $this->faker->numberBetween(1000, 9999),
+            'nombre' => $this->faker->name,
+            'descripcion' => $this->faker->text,
+            'precio' => $this->faker->randomNumber(2),
+            'url_imagen' => $this->faker->imageUrl(),
+            'like' => rand(0, 10),
+            'dislike' => rand(0, 10),
         ];
     }
 }

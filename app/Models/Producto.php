@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Producto extends Model
 {
@@ -21,7 +22,9 @@ class Producto extends Model
         'user_id'
     ];
 
-    public function users(){
+    protected $hidden = ["created_at", "updated_at"];
+
+    public function user(){
         return $this->belongsTo(User::class);
     }
 }

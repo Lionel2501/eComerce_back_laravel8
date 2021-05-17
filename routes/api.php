@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("/productos", [\App\Http\Controllers\ProductoController::class, 'index']);
+Route::get("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'show']);
+Route::delete("/productos/{id}", [\App\Http\Controllers\ProductoController::class, 'destroy']);

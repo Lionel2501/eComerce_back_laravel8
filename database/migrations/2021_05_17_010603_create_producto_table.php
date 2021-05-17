@@ -19,13 +19,13 @@ class CreateProductoTable extends Migration
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->decimal('precio', 10, 2)->default(0);
-            $table->string('url_imagen', 20)->nullable();
+            $table->string('url_imagen')->nullable();
             $table->integer('like')->default(0);
             $table->integer('dislike')->default(0);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
-                ->reference('id')
+                ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
